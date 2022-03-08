@@ -1,4 +1,4 @@
-import hre from 'hardhat'
+const hre = require('hardhat')
 
 
 const main = async () => {
@@ -6,7 +6,7 @@ const main = async () => {
 
   // We get the contract to deploy
   const Transactions = await hre.ethers.getContractFactory("Transactions");
-  const transactions = await Greeter.deploy();
+  const transactions = await Transactions.deploy();
 
   await transactions.deployed();
 

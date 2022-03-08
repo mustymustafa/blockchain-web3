@@ -6,7 +6,7 @@ contract Transactions {
    uint256 transactionCount; 
 
 
-     event Transfer(address from, address receiver, uint amount, string message, uinit256 timestamp, string keyword);
+     event Transfer(address from, address receiver, uint amount, string message, uint256 timestamp, string keyword);
 
      //create a structure
 
