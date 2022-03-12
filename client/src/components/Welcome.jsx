@@ -4,7 +4,7 @@ import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 
 import Loader from './Loader'
-
+import {TransactionContext} from '../context/TransactionContext'
 
 
 
@@ -25,10 +25,9 @@ import Loader from './Loader'
 
 
 const Welcome = () => {
-    
-
-
-  const connectWallet = () => {};
+    const {connectWallet} = useContext(TransactionContext)
+ 
+  
   return (
     <div className="flex w-full justify-center items-center">
       <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
