@@ -16,15 +16,49 @@ const getEthereumContract = () => {
 
 export const TransactionProvider = ({children}) => {
 
-    const [currentAccount, setCurrentAccount] = useState('')
+    const [currentAccount, setCurrentAccount] = useState()
+    const [formData, setFormData] = useState({addressTo: '', amount: '', keyword: '', message: ''})
+
+
+    const handleChange = (e,name) => {
+        setFormData((prevState) => ({...prevState, [name]: e.target.value}))
+    }
+
     const checkIfWalletIsConnected = async () => {
+        try {
+            
         if(!ethereum) return alert('Please install metamask');
         //get ethereum accounts
         const accounts = await ethereum.request({method: 'eth_accounts'})
-        console.log(accounts)
+        if(accounts.length){
+            console.log(accounts)
+            setCurrentAccount(accounts[0])
+            //get all transactions
+
+        } else {
+            console.log('No accounts found')
+        }
+          } catch (error) {
+              console.log(error)
+             throw new Error('No ethereum object')
+        }
+     
     }
 
     const connectWallet = async () => {
+        try {
+            if(!ethereum) return alert('Please install metamask');
+
+            //get all accounts and be able to choose one
+            const accounts = await ethereum.request({method: 'eth_requestAccounts'})
+            setCurrentAccount(accounts[0])
+        } catch (error) {
+            console.log(error)
+            throw new Error('No ethereum object')
+        }
+    }
+
+     const sendTransaction = async () => {
         try {
             if(!ethereum) return alert('Please install metamask');
 
@@ -41,7 +75,7 @@ export const TransactionProvider = ({children}) => {
         checkIfWalletIsConnected()
     }, [])
     return (
-        <TransactionContext.Provider value={{connectWallet}}>
+        <TransactionContext.Provider value={{connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction}}>
                 {children}
         </TransactionContext.Provider>
     )
