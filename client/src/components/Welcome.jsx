@@ -27,12 +27,12 @@ import {TransactionContext} from '../context/TransactionContext'
 const Welcome = () => {
     const {connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction} = useContext(TransactionContext)
  
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     const {addressTo, amount, keyword, message} = formData;
 
     //prevents page from reloading after submitting form
     e.preventDefault();
-    
+
     if(!addressTo || !amount || !keyword || !message) return;
 
     sendTransaction();
@@ -52,17 +52,16 @@ const Welcome = () => {
           Krypto.
         </p>
 
-        {
-          !currentAccount && ( <button
-          type="button"
-          onClick={connectWallet}
-          className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
-        >
-          <AiFillPlayCircle className="text-white mr-2" />
-          <p className="text-white text-base font-semibold">Connect Wallet</p>
-        </button>)
-        }
-       
+        {!currentAccount && (
+          <button
+            type="button"
+            onClick={connectWallet}
+            className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
+          >
+            <AiFillPlayCircle className="text-white mr-2" />
+            <p className="text-white text-base font-semibold">Connect Wallet</p>
+          </button>
+        )}
 
         <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
           <div className={`rounded-tl-2xl ${companyCommonStyles}`}>
@@ -91,9 +90,7 @@ const Welcome = () => {
                 <BsInfoCircle fontSize={17} color="#fff" />
               </div>
               <div>
-                <p className="text-white font-light text-sm">
-                  oxffjdjd....38938rh
-                </p>
+                <p className="text-white font-light text-sm">Address</p>
                 <p className="text-white font-semibold text-lg mt-1">
                   Ethereum
                 </p>
@@ -105,25 +102,27 @@ const Welcome = () => {
               placeholder="Address To"
               name="addressTo"
               type="text"
-              handleChange={() => {handleChange}}
+              handleChange={
+                handleChange
+              }
             />
             <Input
               placeholder="Amount (ETH)"
               name="amount"
               type="number"
-              handleChange={() => {handleChange}}
+              handleChange={handleChange}
             />
             <Input
               placeholder="Keyword (Gif)"
               name="keyword"
               type="text"
-              handleChange={() => {handleChange}}
+              handleChange={handleChange}
             />
             <Input
               placeholder="Enter Message"
               name="message"
               type="text"
-              handleChange={() => {handleChange}}
+              handleChange={handleChange}
             />
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
