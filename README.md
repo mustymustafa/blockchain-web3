@@ -1,9 +1,11 @@
 # blockchain-web3
 This is an on-going personal web3 blockcahin project in Reactjs. 
 
-You can run the project my installing the node_modules using:
+You can run the project by installing the node_modules using:
 
   yarn
+  
+	&&
 	
   yarn run dev
 	
